@@ -1,7 +1,5 @@
 package edu.eci.arsw.threads;
 
-import edu.eci.arsw.math.PiDigits;
-
 /**
  *
  * @author Sierra - Suarez
