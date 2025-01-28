@@ -24,21 +24,19 @@ public class CountThreadsMain {
         
         /** SEGUNDO PUNTO */
         int start = 0;
-        int count = 50; // Número total de dígitos a calcular
-        int numThreads = 4; // Número de hilos
+        int count = 1000000; // Número total de dígitos a calcular
+        int numThreads = 10000; // Número de hilos
 
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilos...");
 
         try {
-            // Realizar el cálculo en paralelo
             byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
 
-            // Mostrar los resultados (convertidos a caracteres hexadecimales para mejor lectura)
             System.out.println("Dígitos calculados:");
             for (byte b : result) {
                 System.out.print(Integer.toHexString(b & 0xFF).toUpperCase());
             }
-            System.out.println(); // Salto de línea final
+            System.out.println();
 
         } catch (IllegalArgumentException e) {
             System.err.println("Error en los parámetros: " + e.getMessage());
