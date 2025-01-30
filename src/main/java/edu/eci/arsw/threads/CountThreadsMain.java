@@ -25,7 +25,7 @@ public class CountThreadsMain {
          */
         
         /** SEGUNDO PUNTO */
-        /***/
+        /**
         int start = 0;
         int count = 100000; // Número total de dígitos a calcular
         int numThreads = 4; // Número de hilos
@@ -45,14 +45,14 @@ public class CountThreadsMain {
             System.err.println("Error en los parámetros: " + e.getMessage());
         } catch (RuntimeException e) {
             System.err.println("Error en la ejecución: " + e.getMessage());
-        }
+        }*/
         
         /** TERCER PUNTO */
-        /**
+        
         int start = 0;
         int count = 100000; // Cien mil dígitos de PI
         int cores = Runtime.getRuntime().availableProcessors();
-        int[] threadConfigs = {cores, cores * 2, 200, 500};
+        int[] threadConfigs = {1, cores, cores * 2, 200, 500};
 
         for (int numThreads : threadConfigs) {
             long startTime = System.currentTimeMillis();
@@ -60,7 +60,6 @@ public class CountThreadsMain {
             try {
                 byte[] result = PiDigits.getDigits(start, count, numThreads);
                 
-                // Imprimir algunos dígitos como ejemplo
                 System.out.println("Primeros dígitos calculados con " + numThreads + " hilos:");
                 for (int i = 0; i < 10; i++) {
                     System.out.print(Integer.toHexString(result[i] & 0xFF).toUpperCase());
@@ -76,7 +75,7 @@ public class CountThreadsMain {
             System.out.println("Proceso finalizado con " + numThreads + 
                                " hilo(s). El tiempo fue de " + 
                                (endTime - startTime) + " ms.");
-        }*/
+        }
     }
 }
 
