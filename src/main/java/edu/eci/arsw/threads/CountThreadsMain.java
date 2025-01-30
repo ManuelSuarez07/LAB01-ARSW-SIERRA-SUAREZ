@@ -1,5 +1,7 @@
 package edu.eci.arsw.threads;
 
+import edu.eci.arsw.math.PiDigits;
+
 /**
  *
  * @author Sierra - Suarez
@@ -22,16 +24,16 @@ public class CountThreadsMain {
          * countThread2.run(); countThread3.run();
          */
         
-        /** SEGUNDO PUNTO*/
-        /**
+        /** SEGUNDO PUNTO */
+        /***/
         int start = 0;
-        int count = 10000; // Número total de dígitos a calcular
-        int numThreads = 1000; // Número de hilos
+        int count = 100000; // Número total de dígitos a calcular
+        int numThreads = 4; // Número de hilos
 
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilos...");
 
         try {
-            byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
+            byte[] result = PiDigits.getDigits(start, count, numThreads);
 
             System.out.println("Dígitos calculados:");
             for (byte b : result) {
@@ -43,9 +45,10 @@ public class CountThreadsMain {
             System.err.println("Error en los parámetros: " + e.getMessage());
         } catch (RuntimeException e) {
             System.err.println("Error en la ejecución: " + e.getMessage());
-        }*/
+        }
         
         /** TERCER PUNTO */
+        /**
         int start = 0;
         int count = 100000; // Cien mil dígitos de PI
         int cores = Runtime.getRuntime().availableProcessors();
@@ -55,7 +58,15 @@ public class CountThreadsMain {
             long startTime = System.currentTimeMillis();
 
             try {
-                byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
+                byte[] result = PiDigits.getDigits(start, count, numThreads);
+                
+                // Imprimir algunos dígitos como ejemplo
+                System.out.println("Primeros dígitos calculados con " + numThreads + " hilos:");
+                for (int i = 0; i < 10; i++) {
+                    System.out.print(Integer.toHexString(result[i] & 0xFF).toUpperCase());
+                }
+                System.out.println("...");
+
             } catch (Exception e) {
                 System.err.println("Error al procesar con " + numThreads + " hilos.");
             }
@@ -65,7 +76,7 @@ public class CountThreadsMain {
             System.out.println("Proceso finalizado con " + numThreads + 
                                " hilo(s). El tiempo fue de " + 
                                (endTime - startTime) + " ms.");
-        }
+        }*/
     }
 }
 

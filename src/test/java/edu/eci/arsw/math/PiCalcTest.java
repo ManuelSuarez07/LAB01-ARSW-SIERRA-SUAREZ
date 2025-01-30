@@ -1,6 +1,5 @@
 package edu.eci.arsw.math;
 
-import edu.eci.arsw.threads.PiDigitsThread;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -10,8 +9,7 @@ import static org.junit.Assert.*;
  */
 public class PiCalcTest {
 
-    // Definir 'expected' como un campo estático accesible en todas las pruebas.
-    private static final byte[] expected = new byte[]{
+    private static final byte[] expected = new byte[] {
         0x2, 0x4, 0x3, 0xF, 0x6, 0xA, 0x8, 0x8,
         0x8, 0x5, 0xA, 0x3, 0x0, 0x8, 0xD, 0x3,
         0x1, 0x3, 0x1, 0x9, 0x8, 0xA, 0x2, 0xE,
@@ -36,10 +34,9 @@ public class PiCalcTest {
      */
     @Test
     public void piGenTest() throws Exception {
-        // Test para diferentes rangos de inicio y cantidad de dígitos
         for (int start = 0; start < expected.length; start++) {
             for (int count = 0; count < expected.length - start; count++) {
-                byte[] digits = PiDigits.getDigits(start, count, 200);
+                byte[] digits = PiDigits.getDigits(start, count, 200); 
                 assertEquals("Error en el cálculo para start=" + start + " y count=" + count, count, digits.length);
 
                 for (int i = 0; i < digits.length; i++) {
@@ -61,7 +58,7 @@ public class PiCalcTest {
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilo...");
 
         try {
-            byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
+            byte[] result = PiDigits.getDigits(start, count, numThreads);
            
             assertNotNull("El resultado no debe ser nulo", result);
             assertEquals("La cantidad de dígitos calculados debe ser igual a la cantidad solicitada", count, result.length);
@@ -83,8 +80,7 @@ public class PiCalcTest {
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilos...");
 
         try {
-            byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
-
+            byte[] result = PiDigits.getDigits(start, count, numThreads);
             assertNotNull("El resultado no debe ser nulo", result);
             assertEquals("La cantidad de dígitos calculados debe ser igual a la cantidad solicitada", count, result.length);
 
@@ -105,7 +101,7 @@ public class PiCalcTest {
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilos...");
 
         try {
-            byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
+            byte[] result = PiDigits.getDigits(start, count, numThreads);
 
             assertNotNull("El resultado no debe ser nulo", result);
             assertEquals("La cantidad de dígitos calculados debe ser igual a la cantidad solicitada", count, result.length);
@@ -115,7 +111,6 @@ public class PiCalcTest {
         }
     }
 
-  
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     public static String bytesToHex(byte[] bytes) {

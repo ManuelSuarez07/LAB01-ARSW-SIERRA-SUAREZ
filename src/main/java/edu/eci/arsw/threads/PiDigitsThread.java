@@ -1,52 +1,36 @@
+
 package edu.eci.arsw.threads;
 
 import edu.eci.arsw.math.PiDigits;
-import java.util.concurrent.*;
-
+import java.util.concurrent.CountDownLatch;
 /**
- *
  * @author Sierra - Suarez
  */
-public class PiDigitsThread {
+public class PiDigitsThread extends Thread {
+    
+    private final int start;
+    private final int count;
+    private final byte[] digits;
+    private final int baseStart;
+    private final CountDownLatch latch;
 
-    public static byte[] calculateInParallel(int start, int count, int numThreads) {
-        if (start < 0 || count < 0 || numThreads <= 0) {
-            throw new IllegalArgumentException("Invalid arguments");
-        }
+    public PiDigitsThread(int start, int count, byte[] digits, int baseStart, CountDownLatch latch) {
+        this.start = start;
+        this.count = count;
+        this.digits = digits;
+        this.baseStart = baseStart;
+        this.latch = latch;
+    }
 
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-        int chunkSize = count / numThreads;
-        int remainder = count % numThreads;
-
-        byte[] result = new byte[count];
-        int currentStart = start;
-
-        CountDownLatch latch = new CountDownLatch(numThreads);
-
-        for (int i = 0; i < numThreads; i++) {
-            final int threadStart = currentStart;
-            final int threadCount = (i < remainder) ? chunkSize + 1 : chunkSize;
-
-            executor.submit(() -> {
-                try {
-                    byte[] partialResult = PiDigits.getDigits(threadStart, threadCount, 1);
-                    System.arraycopy(partialResult, 0, result, threadStart - start, partialResult.length);
-                } finally {
-                    latch.countDown();
-                }
-            });
-
-            currentStart += threadCount;
-        }
-
+    @Override
+    public void run() {
         try {
-            latch.await();
-        } catch (InterruptedException e) {
-            throw new RuntimeException("Thread interrupted", e);
+            byte[] partialDigits = PiDigits.calculateRange(start, count);           
+            synchronized (digits) {
+                System.arraycopy(partialDigits, 0, digits, start - baseStart, partialDigits.length);
+            }
         } finally {
-            executor.shutdown();
+            latch.countDown(); 
         }
-
-        return result;
     }
 }
