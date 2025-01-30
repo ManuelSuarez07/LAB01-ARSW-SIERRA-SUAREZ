@@ -51,11 +51,19 @@ Con lo anterior, y con los tiempos de ejecución dados, haga una gráfica de tie
 
 1. Según la [ley de Amdahls](https://www.pugetsystems.com/labs/articles/Estimating-CPU-Performance-using-Amdahls-Law-619/#WhatisAmdahlsLaw?):
 
-	![](img/ahmdahls.png), donde _S(n)_ es el mejoramiento teórico del desempeño, _P_ la fracción paralelizable del algoritmo, y _n_ el número de hilos, a mayor _n_, mayor debería ser dicha mejora. Por qué el mejor desempeño no se logra con los 500 hilos?, cómo se compara este desempeño cuando se usan 200?. 
+	![](img/ahmdahls.png), donde _S(n)_ es el mejoramiento teórico del desempeño, _P_ la fracción paralelizable del algoritmo, y _n_ el número de hilos, a mayor _n_, mayor debería ser dicha mejora. Por qué el mejor desempeño no se logra con los 500 hilos?, cómo se compara este desempeño cuando se usan 200?.
+
+RTA: Se esperaria que mas hilos deberían mejorar el rendimiento, pero tenemos un límite en cuanto a la ganancia obtenida. Según la Ley de Amdahl, la parte del código que no se puede paralelizar impide que el desempeño mejore indefinidamente con más hilos. Además, al usar 500 hilos en una CPU con menos núcleos, hay más competencia por los recursos y una mayor sobrecarga en la administración de los hilos, lo que frena el rendimiento. En comparación, al usar 200 hilos, se obtiene prácticamente el mismo resultado, porque el exceso de hilos solo genera más cambios de contexto sin aportar beneficios significativos.
+
+
 
 2. Cómo se comporta la solución usando tantos hilos de procesamiento como núcleos comparado con el resultado de usar el doble de éste?.
+RTA: Al aumentar el número de hilos al doble de los núcleos, puede haber una leve mejora en ciertos casos, especialmente si los hilos pasan tiempo esperando operaciones de entrada y salida. Aun así, el beneficio no es lineal y puede verse afectado por la sobrecarga en la gestión de hilos. Si el número de hilos sigue aumentando, llega un punto en el que el rendimiento deja de mejorar e incluso puede empeorar.
 
 3. De acuerdo con lo anterior, si para este problema en lugar de 500 hilos en una sola CPU se pudiera usar 1 hilo en cada una de 500 máquinas hipotéticas, la ley de Amdahls se aplicaría mejor?. Si en lugar de esto se usaran c hilos en 500/c máquinas distribuidas (siendo c es el número de núcleos de dichas máquinas), se mejoraría?. Explique su respuesta.
+RTA: 1 hilo por 500 máquinas: Distribuir la carga en múltiples máquinas permitiría aprovechar mejor los recursos individuales sin que haya competencia entre hilos, lo que en teoría haría que la Ley de Amdahl se aplicara de forma más efectiva. Sin embargo, la comunicación entre máquinas introduce latencias que podrían reducir la ganancia esperada.
+
+c hilos en 500/c máquinas: Esta distribución sería más equilibrada, ya que cada máquina utilizaría un número de hilos acorde con sus núcleos, evitando problemas de sobrecarga en una sola CPU. Además, al repartir la carga entre varias máquinas, se optimiza el uso de los recursos y se mantiene un buen desempeño sin generar tiempos muertos o competencia excesiva por los procesadores.
 
 
 
