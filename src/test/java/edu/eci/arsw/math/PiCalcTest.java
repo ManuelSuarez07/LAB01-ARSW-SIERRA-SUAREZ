@@ -55,15 +55,14 @@ public class PiCalcTest {
     @Test
     public void testWithOneThread() throws Exception {
         int start = 0;
-        int count = 100000; // Número total de dígitos a calcular
-        int numThreads = 1; // 1 hilo
+        int count = 100000; 
+        int numThreads = 1; 
 
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilo...");
 
         try {
             byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
-
-            // Verificamos que los dígitos calculados no son nulos y tienen la longitud esperada
+           
             assertNotNull("El resultado no debe ser nulo", result);
             assertEquals("La cantidad de dígitos calculados debe ser igual a la cantidad solicitada", count, result.length);
 
@@ -78,15 +77,14 @@ public class PiCalcTest {
     @Test
     public void testWithTwoThreads() throws Exception {
         int start = 0;
-        int count = 100000; // Número total de dígitos a calcular
-        int numThreads = 2; // 2 hilos
+        int count = 100000; 
+        int numThreads = 2; 
 
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilos...");
 
         try {
             byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
 
-            // Verificamos que los dígitos calculados no son nulos y tienen la longitud esperada
             assertNotNull("El resultado no debe ser nulo", result);
             assertEquals("La cantidad de dígitos calculados debe ser igual a la cantidad solicitada", count, result.length);
 
@@ -101,15 +99,14 @@ public class PiCalcTest {
     @Test
     public void testWithThreeThreads() throws Exception {
         int start = 0;
-        int count = 100000; // Número total de dígitos a calcular
-        int numThreads = 3; // 3 hilos
+        int count = 100000; 
+        int numThreads = 3; 
 
         System.out.println("Calculando " + count + " dígitos de PI en " + numThreads + " hilos...");
 
         try {
             byte[] result = PiDigitsThread.calculateInParallel(start, count, numThreads);
 
-            // Verificamos que los dígitos calculados no son nulos y tienen la longitud esperada
             assertNotNull("El resultado no debe ser nulo", result);
             assertEquals("La cantidad de dígitos calculados debe ser igual a la cantidad solicitada", count, result.length);
 
@@ -118,7 +115,7 @@ public class PiCalcTest {
         }
     }
 
-    // Método auxiliar para convertir los bytes a formato hexadecimal
+  
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     public static String bytesToHex(byte[] bytes) {

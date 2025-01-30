@@ -16,9 +16,10 @@ public class PiDigits {
      * Returns a range of hexadecimal digits of pi.
      * @param start The starting location of the range.
      * @param count The number of digits to return
+     * @param n
      * @return An array containing the hexadecimal digits.
      */
-    public static byte[] getDigits(int start, int count, int par2) {
+    public static byte[] getDigits(int start, int count, int n) {
         if (start < 0) {
             throw new RuntimeException("Invalid Interval");
         }
