@@ -52,6 +52,7 @@ Al iniciar el programa ejecute el monitor jVisualVM, y a medida que corran las p
 ![](img/Results.png)
 
 Con lo anterior, y con los tiempos de ejecución dados, haga una gráfica de tiempo de solución vs. número de hilos. Analice y plantee hipótesis con su compañero para las siguientes preguntas (puede tener en cuenta lo reportado por jVisualVM):
+![](img/Grafica.png) 
 
 
 
