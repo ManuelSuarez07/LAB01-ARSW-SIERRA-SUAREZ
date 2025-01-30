@@ -59,7 +59,6 @@ public class PiDigits {
     }
 
     /**
-     * Calcula un rango de dígitos de Pi secuencialmente.
      * @param start El dígito inicial.
      * @param count La cantidad de dígitos a calcular.
      * @return Un arreglo de dígitos.
@@ -86,7 +85,6 @@ public class PiDigits {
     }
 
     /**
-     * Retorna la suma de 16^(n - k)/(8 * k + m) de 0 a k.
      * @param m La base del módulo.
      * @param n La base del exponente.
      * @return La suma calculada.
@@ -117,7 +115,6 @@ public class PiDigits {
     }
 
     /**
-     * Retorna 16^p mod m.
      * @param p El exponente.
      * @param m El módulo.
      * @return El resultado de 16^p mod m.
